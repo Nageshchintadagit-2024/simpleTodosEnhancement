@@ -1,5 +1,7 @@
 import {Component} from 'react'
 
+import {v4 as uuidv4} from 'uuid'
+
 import TodoItem from '../TodoItem'
 
 import './index.css'
@@ -44,6 +46,7 @@ const initialTodosList = [
 class SimpleTodos extends Component {
   state = {
     tasksList: initialTodosList,
+    todoItem: '',
   }
 
   deleteUser = id => {
@@ -52,12 +55,71 @@ class SimpleTodos extends Component {
     this.setState({tasksList: filteredList})
   }
 
+  onChangeTodo = event => {
+    this.setState({todoItem: event.target.value})
+  }
+
+  handleAddTodo = () => {
+    const {todoItem} = this.state
+    const newTodoTitle = todoItem.trim()
+    const lastChar = newTodoTitle.charAt(newTodoTitle.length - 1)
+    console.log(lastChar)
+    if (newTodoTitle) {
+      if (!isNaN(lastChar)) {
+        for (let i = 0; i < lastChar; i++) {
+          const newTodoItem = {
+            id: uuidv4(),
+            title: newTodoTitle.slice(0, newTodoTitle.length - 1),
+          }
+          this.setState(prevState => ({
+            tasksList: [...prevState.tasksList, newTodoItem],
+            todoItem: '',
+          }))
+        }
+      } else {
+        if (newTodoTitle) {
+          const newTodoItem = {
+            id: uuidv4(),
+            title: newTodoTitle,
+          }
+          this.setState(prevState => ({
+            tasksList: [...prevState.tasksList, newTodoItem],
+            todoItem: '',
+          }))
+        }
+      }
+    }
+  }
+
+  renderAddTodoItem = () => {
+    const {tasksList, todoItem} = this.state
+    return (
+      <div className="add-todo-container">
+        <input
+          type="text"
+          className="add-todo"
+          placeholder="Add your todo here..."
+          value={todoItem}
+          onChange={this.onChangeTodo}
+        />
+        <button
+          type="button"
+          className="add-button"
+          onClick={this.handleAddTodo}
+        >
+          Add
+        </button>
+      </div>
+    )
+  }
+
   render() {
     const {tasksList} = this.state
     return (
       <div className="container">
         <div className="todos-container">
           <h1 className="heading">Simple Todos</h1>
+          {this.renderAddTodoItem()}
           <ul className="list-name-container">
             {tasksList.map(each => (
               <TodoItem

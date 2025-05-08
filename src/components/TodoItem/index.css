@@ -6,6 +6,8 @@
   align-items: center;
   padding: 10px;
   width: 100%;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
 }
 .task {
   font-size: 22px;
@@ -26,4 +28,68 @@
   font-weight: 600;
   border-radius: 8px;
   background-color: transparent;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.edit-button {
+  height: 36px;
+  width: 90px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border: 1px solid #0bff3c;
+  color: #235111;
+  font-size: 14px;
+  font-family: 'Roboto';
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: transparent;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.edit-and-delete-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.check-box {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.edit-button:hover {
+  transform: scale((1.05));
+}
+
+.edited-text {
+  font-size: 22px;
+  font-family: 'Roboto';
+  color: black;
+  border: none;
+  background-color: transparent;
+  width: 100%;
+  outline:none;
+  cursor: text;
+
+}
+
+.striked-class {
+  text-decoration: line-through;
 }
